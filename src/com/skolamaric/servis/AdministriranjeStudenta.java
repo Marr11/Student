@@ -91,5 +91,6 @@ public class AdministriranjeStudenta {
 		List<Student> student5 = studenti.stream().filter(s -> s.getGodinaFakulteta() > 4).collect(Collectors.toList());
 		return student5;
 	}
+	
 
 }

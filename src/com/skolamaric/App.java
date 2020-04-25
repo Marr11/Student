@@ -41,6 +41,7 @@ public class App {
 		System.out.println("=================Spisak studenata apsolvenata===========================");
 		System.out.println("Ukupan broj studenata: " + student5.size());
 		PrikaziUtils.IzlistajStudente(student5);
+		
 	}
 
 }
