@@ -21,7 +21,7 @@ public class AppConsole {
 		List<Student> studenti = administriranje.generisanje();
 		System.out.println("=================Spisak studenata========================================================");
 		System.out.println("Ukupan broj studenata: " + studenti.size());
-		PrikaziUtils.IzlistajStudente(studenti);
+		//PrikaziUtils.IzlistajStudente(studenti);
 		Scanner in = new Scanner(System.in);
 
 		while (1 == 1) {
@@ -68,21 +68,21 @@ public class AppConsole {
 	}
 
 	private static void Opcija1(List<Student> studenti) {
-		List<Student> student1 = administriranje.studentiPrveGodine(studenti);
+		List<Student> student1 = AdministriranjeStudenta.studentiPrveGodine(studenti);
 		System.out.println("=================Spisak studenata prve godine===========================");
 		System.out.println("Ukupan broj studenata: " + student1.size());
 		PrikaziUtils.IzlistajStudente(student1);
 	}
 
 	private static void Opcija2(List<Student> studenti) {
-		List<Student> student2 = administriranje.studentiDrugeGodine(studenti);
+		List<Student> student2 = AdministriranjeStudenta.studentiDrugeGodine(studenti);
 		System.out.println("=================Spisak studenata druge godine===========================");
 		System.out.println("Ukupan broj studenata: " + student2.size());
 		PrikaziUtils.IzlistajStudente(student2);
 	}
 
 	private static void Opcija3(List<Student> studenti) {
-		List<Student> student3 = administriranje.studentiTreceGodine(studenti);
+		List<Student> student3 = AdministriranjeStudenta.studentiTreceGodine(studenti);
 		System.out.println("=================Spisak studenata trece godine===========================");
 		System.out.println("Ukupan broj studenata: " + student3.size());
 		PrikaziUtils.IzlistajStudente(student3);

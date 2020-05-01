@@ -5,58 +5,56 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.skolamaric.dao.StudentDAO;
 import com.skolamaric.dao.StudentInMemoryDAOImpl;
 import com.skolamaric.model.Student;
 import com.skolamaric.utils.KONSTANTE;
 
 public class AdministriranjeStudenta {
-	private static final HashMap<String, Student> upisaniStudenti = new HashMap<String, Student>();
-	
+
+	private StudentInMemoryDAOImpl studentDAO;
+
+	public AdministriranjeStudenta() {
+		studentDAO = new StudentInMemoryDAOImpl();
+	}
+
 	public List<Student> generisanje() {
 		List<Student> studenti = new ArrayList<Student>();
+		Student zadnjiUpisaniStudent = null;
 		for (int i = 0; i < 100; i++) {
-			Student student = new Student();
+			String brojIndeksa = "";
+			Student student = new Student(brojIndeksa);
 			student.setIme(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
 			student.setPrezime(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
-			student.setGodinaFakulteta(randomBrojGodine());
-			student.setBrojIndeksa(randomBrojIndeksa());
-			student.setBrojPolozenihIspita(randomBrojPolozenihIspita());
+			student.setGodinaFakulteta(godinaStudija());
+			student.setBrojPolozenihIspita(polozeniIspiti());
 			studenti.add(student);
-			
+			zadnjiUpisaniStudent = studentDAO.create(student);
+
 		}
+		System.out.println("Upisanih studenta: " + studentDAO.count());
+		System.out.println("Poslednji upisani student: "+ zadnjiUpisaniStudent.getBrojIndeksa() 
+		                    + ", godina studija: "+  studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa()).getGodinaFakulteta());
 
 		return studenti;
 	}
 
-	private int randomBrojGodine() {
+	private int godinaStudija() {
 		// random broj za godinu fakulteta, ali od 1-5
 		int broj;
 		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_GODINE_STUDIJA - KONSTANTE.MIN_BROJ_GODINE_STUDIJA) + 1))
 				+ KONSTANTE.MIN_BROJ_GODINE_STUDIJA;
-		
+
 		return broj;
 	}
 
-	private int randomBrojPolozenihIspita() {
+	private int polozeniIspiti() {
 		// random funkcija za broj, broj polozenih ispita - izmedju 1-20
 		int broj;
 		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_POLOZENIH_ISPITA - KONSTANTE.MIN_BROJ_POLOZENIH_ISPITA) + 1))
 				+ KONSTANTE.MIN_BROJ_POLOZENIH_ISPITA;
 
 		return broj;
-	}
-
-	private String randomBrojIndeksa() {
-				
-		int broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_ZA_INDEKS - KONSTANTE.MIN_BROJ_ZA_INDEKS) + 1))
-				+ KONSTANTE.MIN_BROJ_ZA_INDEKS;		
-		String randomBrojIndeksa = KONSTANTE.slucajnoSlovo() + broj;
-		if(upisaniStudenti.containsKey(randomBrojIndeksa)) {
-			System.out.println("DUPLIKAT" + randomBrojIndeksa);
-			return randomBrojIndeksa();
-		}
-		upisaniStudenti.put(randomBrojIndeksa, null);
-		return randomBrojIndeksa;
 	}
 
 	public static List<Student> studentiPrveGodine(List<Student> studenti) {
@@ -74,7 +72,7 @@ public class AdministriranjeStudenta {
 	}
 
 	public static List<Student> studentiTreceGodine(List<Student> studenti) {
-		List<Student> student3 = studenti.stream().filter(s -> s.getGodinaFakulteta() == 3 )
+		List<Student> student3 = studenti.stream().filter(s -> s.getGodinaFakulteta() == 3)
 				.collect(Collectors.toList());
 		return student3;
 
@@ -91,6 +89,5 @@ public class AdministriranjeStudenta {
 		List<Student> student5 = studenti.stream().filter(s -> s.getGodinaFakulteta() > 4).collect(Collectors.toList());
 		return student5;
 	}
-	
 
 }

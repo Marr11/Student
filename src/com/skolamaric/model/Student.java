@@ -8,7 +8,9 @@ package com.skolamaric.model;
 		private int brojPolozenihIspita;
 		private String brojIndeksa;
 		
-		
+		public Student (String brojIndeksa) {
+			brojIndeksa = this.brojIndeksa;
+		}
 		
 		public String getIme() {
 			return ime;

@@ -8,4 +8,6 @@ public interface StudentDAO {
 	Student read (String brojIndeksa);
 	Student update (Student student);
 	void delete (Student student);
+	
+	int count();
 }
