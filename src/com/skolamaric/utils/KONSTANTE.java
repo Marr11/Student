@@ -3,8 +3,6 @@ package com.skolamaric.utils;
 public class KONSTANTE {
 	public static final int MIN_BROJ_GODINE_STUDIJA = 1;
 	public static final int MAX_BROJ_GODINE_STUDIJA = 5;
-	public static final int MIN_BROJ_POLOZENIH_ISPITA = 0;
-	public static final int MAX_BROJ_POLOZENIH_ISPITA = 35;
 	public static final int MIN_BROJ_ZA_INDEKS = 1;
 	public static final int MAX_BROJ_ZA_INDEKS = 999;
 

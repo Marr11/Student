@@ -7,7 +7,7 @@ public interface StudentDAO {
 	Student create (Student student);
 	Student read (String brojIndeksa);
 	Student update (Student student);
-	void delete (Student student);
+	void delete (String brojIndeksa);
 	
 	int count();
 }

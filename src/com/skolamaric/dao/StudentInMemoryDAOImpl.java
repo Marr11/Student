@@ -24,13 +24,13 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 
 	@Override
 	public Student update(Student student) {
-		// TODO Auto-generated method stub
-		return null;
+		upisaniStudenti.put(student.getBrojIndeksa(), student);
+		return student;
 	}
 
 	@Override
-	public void delete(Student student) {
-		// TODO Auto-generated method stub
+	public void delete(String brojIndeksa) {
+		upisaniStudenti.remove(brojIndeksa);
 
 	}
 

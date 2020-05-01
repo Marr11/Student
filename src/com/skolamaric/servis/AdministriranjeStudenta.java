@@ -27,15 +27,18 @@ public class AdministriranjeStudenta {
 			student.setIme(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
 			student.setPrezime(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
 			student.setGodinaFakulteta(godinaStudija());
-			student.setBrojPolozenihIspita(polozeniIspiti());
+			student.setAktivanStudent(true);
 			studenti.add(student);
 			zadnjiUpisaniStudent = studentDAO.create(student);
 
 		}
 		System.out.println("Upisanih studenta: " + studentDAO.count());
 		System.out.println("Poslednji upisani student: "+ zadnjiUpisaniStudent.getBrojIndeksa() 
-		                    + ", godina studija: "+  studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa()).getGodinaFakulteta());
-
+		                    + ", godina studija: "+  studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa()).isAktivanStudent());
+		zadnjiUpisaniStudent.setAktivanStudent(!zadnjiUpisaniStudent.isAktivanStudent());
+		zadnjiUpisaniStudent = studentDAO.update(zadnjiUpisaniStudent);
+		System.out.println("Poslednji upisani student: "+ zadnjiUpisaniStudent.getBrojIndeksa() 
+        + ", godina studija: "+  studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa()).isAktivanStudent());
 		return studenti;
 	}
 
@@ -44,15 +47,6 @@ public class AdministriranjeStudenta {
 		int broj;
 		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_GODINE_STUDIJA - KONSTANTE.MIN_BROJ_GODINE_STUDIJA) + 1))
 				+ KONSTANTE.MIN_BROJ_GODINE_STUDIJA;
-
-		return broj;
-	}
-
-	private int polozeniIspiti() {
-		// random funkcija za broj, broj polozenih ispita - izmedju 1-20
-		int broj;
-		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_POLOZENIH_ISPITA - KONSTANTE.MIN_BROJ_POLOZENIH_ISPITA) + 1))
-				+ KONSTANTE.MIN_BROJ_POLOZENIH_ISPITA;
 
 		return broj;
 	}

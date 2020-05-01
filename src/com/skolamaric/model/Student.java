@@ -5,7 +5,7 @@ package com.skolamaric.model;
 		private String ime;
 		private String prezime;
 		private int godinaFakulteta;
-		private int brojPolozenihIspita;
+		private boolean aktivanStudent;
 		private String brojIndeksa;
 		
 		public Student (String brojIndeksa) {
@@ -30,13 +30,16 @@ package com.skolamaric.model;
 		public void setGodinaFakulteta(int godinaFakulteta) {
 			this.godinaFakulteta = godinaFakulteta;
 		}
-		public int getBrojPolozenihIspita() {
-			return brojPolozenihIspita;
-		}
-		public void setBrojPolozenihIspita(int brojPolozenihIspita) {
-			this.brojPolozenihIspita = brojPolozenihIspita;
-		}
 		
+		
+		public boolean isAktivanStudent() {
+			return aktivanStudent;
+		}
+
+		public void setAktivanStudent(boolean aktivanStudent) {
+			this.aktivanStudent = aktivanStudent;
+		}
+
 		public String getBrojIndeksa() {
 			return brojIndeksa;
 		}
@@ -48,7 +51,8 @@ package com.skolamaric.model;
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + brojPolozenihIspita;
+			result = prime * result + (aktivanStudent ? 1231 : 1237);
+			result = prime * result + ((brojIndeksa == null) ? 0 : brojIndeksa.hashCode());
 			result = prime * result + godinaFakulteta;
 			result = prime * result + ((ime == null) ? 0 : ime.hashCode());
 			result = prime * result + ((prezime == null) ? 0 : prezime.hashCode());
@@ -63,7 +67,12 @@ package com.skolamaric.model;
 			if (getClass() != obj.getClass())
 				return false;
 			Student other = (Student) obj;
-			if (brojPolozenihIspita != other.brojPolozenihIspita)
+			if (aktivanStudent != other.aktivanStudent)
+				return false;
+			if (brojIndeksa == null) {
+				if (other.brojIndeksa != null)
+					return false;
+			} else if (!brojIndeksa.equals(other.brojIndeksa))
 				return false;
 			if (godinaFakulteta != other.godinaFakulteta)
 				return false;
@@ -81,8 +90,8 @@ package com.skolamaric.model;
 		}
 		@Override
 		public String toString() {
-			return "Ime: " + ime + ", prezime: " + prezime + ". Broj indeksa: " + brojIndeksa + " Godina fakulteta: " + godinaFakulteta
-					+ ", broj polozenih ispita: " + brojPolozenihIspita + "." ;
+			return "Student ime: " + ime + ", prezime: " + prezime + ", godina fakulteta: " + godinaFakulteta
+					+ ", da li je student aktivan: " + aktivanStudent + ", broj indeksa: " + brojIndeksa + ".";
 		}
 		
 	}
