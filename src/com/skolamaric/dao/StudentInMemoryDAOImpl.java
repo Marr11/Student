@@ -1,7 +1,10 @@
 package com.skolamaric.dao;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import com.skolamaric.exceptions.dao.ResultNotFoundException;
 import com.skolamaric.model.Student;
 import com.skolamaric.utils.KONSTANTE;
 
@@ -17,9 +20,13 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public Student read(String brojIndeksa) {
+	public Student read(String brojIndeksa) throws ResultNotFoundException {
 
-		return upisaniStudenti.get(brojIndeksa);
+		Student student = upisaniStudenti.get(brojIndeksa);
+		if(student == null) {
+			throw new ResultNotFoundException("Objekat nije pronadjen");
+		}
+		return student;
 	}
 
 	@Override
@@ -40,7 +47,7 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 				+ KONSTANTE.MIN_BROJ_ZA_INDEKS;
 		String randomBrojIndeksa = KONSTANTE.slucajnoSlovo() + broj;
 		  if (StudentInMemoryDAOImpl.upisaniStudenti.containsKey(randomBrojIndeksa)) {
-			System.out.println("DUPLIKAT" + randomBrojIndeksa);
+			System.out.println("DUPLIKAT  " + randomBrojIndeksa);
 			return brojIndeksa();
 		  }
 		StudentInMemoryDAOImpl.upisaniStudenti.put(randomBrojIndeksa, null);
@@ -53,4 +60,8 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 
 	}
 
+	@Override
+	public List<Student> getAll() throws ResultNotFoundException{
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().collect(Collectors.toList());
+	}
 }

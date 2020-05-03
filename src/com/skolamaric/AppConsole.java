@@ -90,7 +90,7 @@ public class AppConsole {
 
 	private static void Opcija4(List<Student> studenti) {
 		List<Student> student4 = AdministriranjeStudenta.studentiCetvrteGodine(studenti);
-		System.out.println("=================Spisak studenata prve godine===========================");
+		System.out.println("=================Spisak studenata cetvrte godine===========================");
 		System.out.println("Ukupan broj studenata: " + student4.size());
 		PrikaziUtils.IzlistajStudente(student4);
 	}
