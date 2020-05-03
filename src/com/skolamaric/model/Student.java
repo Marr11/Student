@@ -90,7 +90,7 @@ package com.skolamaric.model;
 		}
 		@Override
 		public String toString() {
-			return "Student ime: " + ime + ", prezime: " + prezime + ", godina fakulteta: " + godinaFakulteta
+			return "Ime: " + ime + ", prezime: " + prezime + ", godina fakulteta: " + godinaFakulteta
 					+ ", da li je student aktivan: " + aktivanStudent + ", broj indeksa: " + brojIndeksa + ".";
 		}
 		

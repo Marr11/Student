@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import com.skolamaric.exceptions.dao.ResultNotFoundException;
 import com.skolamaric.model.Student;
 import com.skolamaric.servis.AdministriranjeStudenta;
 import com.skolamaric.utils.PrikaziUtils;
@@ -14,14 +15,11 @@ public class AppConsole {
 	 */
 	static AdministriranjeStudenta administriranje = new AdministriranjeStudenta();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ResultNotFoundException {
 		Date date = new Date();
 		System.out.println("Pocetak rada aplikacije: " + date);
 		System.out.println("=====================================================");
-		List<Student> studenti = administriranje.generisanje();
-		System.out.println("=================Spisak studenata========================================================");
-		System.out.println("Ukupan broj studenata: " + studenti.size());
-		//PrikaziUtils.IzlistajStudente(studenti);
+		administriranje.generisanje();
 		Scanner in = new Scanner(System.in);
 
 		while (1 == 1) {
@@ -33,19 +31,19 @@ public class AppConsole {
 				Opcija0();
 				break;
 			case "1":
-				Opcija1(studenti);
+				Opcija1();
 				break;
 			case "2":
-				Opcija2(studenti);
+				Opcija2();
 				break;
 			case "3":
-				Opcija3(studenti);
+				Opcija3();
 				break;
 			case "4":
-				Opcija4(studenti);
+				Opcija4();
 				break;
 			case "5":
-				Opcija5(studenti);
+				Opcija5();
 				break;
 
 			}
@@ -60,43 +58,43 @@ public class AppConsole {
 
 	}
 
-	private static void Opcija0() {
-		List<Student> studenti = administriranje.generisanje();
+	private static void Opcija0() throws ResultNotFoundException {
+		List<Student> studenti = administriranje.dajSveStudente();
 		System.out.println("=================Spisak studenata======================================");
 		System.out.println("Ukupan broj studenata: " + studenti.size());
 		PrikaziUtils.IzlistajStudente(studenti);
 	}
 
-	private static void Opcija1(List<Student> studenti) {
-		List<Student> student1 = AdministriranjeStudenta.studentiPrveGodine(studenti);
+	private static void Opcija1() {
+		List<Student> student1 = administriranje.studentiPrveGodine();
 		System.out.println("=================Spisak studenata prve godine===========================");
 		System.out.println("Ukupan broj studenata: " + student1.size());
 		PrikaziUtils.IzlistajStudente(student1);
 	}
 
-	private static void Opcija2(List<Student> studenti) {
-		List<Student> student2 = AdministriranjeStudenta.studentiDrugeGodine(studenti);
+	private static void Opcija2() {
+		List<Student> student2 = administriranje.studentiDrugeGodine();
 		System.out.println("=================Spisak studenata druge godine===========================");
 		System.out.println("Ukupan broj studenata: " + student2.size());
 		PrikaziUtils.IzlistajStudente(student2);
 	}
 
-	private static void Opcija3(List<Student> studenti) {
-		List<Student> student3 = AdministriranjeStudenta.studentiTreceGodine(studenti);
+	private static void Opcija3() {
+		List<Student> student3 = administriranje.studentiTreceGodine();
 		System.out.println("=================Spisak studenata trece godine===========================");
 		System.out.println("Ukupan broj studenata: " + student3.size());
 		PrikaziUtils.IzlistajStudente(student3);
 	}
 
-	private static void Opcija4(List<Student> studenti) {
-		List<Student> student4 = AdministriranjeStudenta.studentiCetvrteGodine(studenti);
+	private static void Opcija4() {
+		List<Student> student4 = administriranje.studentiCetvrteGodine();
 		System.out.println("=================Spisak studenata cetvrte godine===========================");
 		System.out.println("Ukupan broj studenata: " + student4.size());
 		PrikaziUtils.IzlistajStudente(student4);
 	}
 
-	private static void Opcija5(List<Student> studenti) {
-		List<Student> student5 = AdministriranjeStudenta.studentiApsolventi(studenti);
+	private static void Opcija5() {
+		List<Student> student5 = administriranje.studentiApsolventi();
 		System.out.println("=================Spisak studenata  apsolvenata===========================");
 		System.out.println("Ukupan broj studenata: " + student5.size());
 		PrikaziUtils.IzlistajStudente(student5);

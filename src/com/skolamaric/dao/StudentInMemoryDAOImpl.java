@@ -23,7 +23,7 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 	public Student read(String brojIndeksa) throws ResultNotFoundException {
 
 		Student student = upisaniStudenti.get(brojIndeksa);
-		if(student == null) {
+		if (student == null) {
 			throw new ResultNotFoundException("Objekat nije pronadjen");
 		}
 		return student;
@@ -46,10 +46,10 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 		int broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_ZA_INDEKS - KONSTANTE.MIN_BROJ_ZA_INDEKS) + 1))
 				+ KONSTANTE.MIN_BROJ_ZA_INDEKS;
 		String randomBrojIndeksa = KONSTANTE.slucajnoSlovo() + broj;
-		  if (StudentInMemoryDAOImpl.upisaniStudenti.containsKey(randomBrojIndeksa)) {
+		if (StudentInMemoryDAOImpl.upisaniStudenti.containsKey(randomBrojIndeksa)) {
 			System.out.println("DUPLIKAT  " + randomBrojIndeksa);
 			return brojIndeksa();
-		  }
+		}
 		StudentInMemoryDAOImpl.upisaniStudenti.put(randomBrojIndeksa, null);
 		return randomBrojIndeksa;
 	}
@@ -61,7 +61,42 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public List<Student> getAll() throws ResultNotFoundException{
+	public List<Student> getAll() throws ResultNotFoundException {
 		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Student> getStudentiPrveGodine() {
+		// TODO Auto-generated method stub
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 1)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Student> getStudentiDrugeGodine() {
+		// TODO Auto-generated method stub
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 2)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Student> getStudentiTreceGodine() {
+		// TODO Auto-generated method stub
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 3)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Student> getStudentiCetvrteGodine() {
+		// TODO Auto-generated method stub
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 4)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Student> getStudentiApsolventi() {
+		// TODO Auto-generated method stub
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() > 1)
+				.collect(Collectors.toList());
 	}
 }
