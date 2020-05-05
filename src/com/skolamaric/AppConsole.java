@@ -6,20 +6,20 @@ import java.util.Scanner;
 
 import com.skolamaric.exceptions.dao.ResultNotFoundException;
 import com.skolamaric.model.Student;
-import com.skolamaric.servis.AdministriranjeStudenta;
+import com.skolamaric.servis.AdministriranjeStudenata;
 import com.skolamaric.utils.PrikaziUtils;
 
 public class AppConsole {
 	/*
 	 * Konzolna aplikacija Graphical user interface(GUI)
 	 */
-	static AdministriranjeStudenta administriranje = new AdministriranjeStudenta();
+	static AdministriranjeStudenata administriranjeStudenata = new AdministriranjeStudenata();
 
 	public static void main(String[] args) throws ResultNotFoundException {
 		Date date = new Date();
 		System.out.println("Pocetak rada aplikacije: " + date);
 		System.out.println("=====================================================");
-		administriranje.generisanje();
+		administriranjeStudenata.generisanje();
 		Scanner in = new Scanner(System.in);
 
 		while (1 == 1) {
@@ -59,42 +59,42 @@ public class AppConsole {
 	}
 
 	private static void Opcija0() throws ResultNotFoundException {
-		List<Student> studenti = administriranje.dajSveStudente();
+		List<Student> studenti = administriranjeStudenata.dajSveStudente();
 		System.out.println("=================Spisak studenata======================================");
 		System.out.println("Ukupan broj studenata: " + studenti.size());
 		PrikaziUtils.IzlistajStudente(studenti);
 	}
 
 	private static void Opcija1() {
-		List<Student> student1 = administriranje.studentiPrveGodine();
+		List<Student> student1 = administriranjeStudenata.studentiPrveGodine();
 		System.out.println("=================Spisak studenata prve godine===========================");
 		System.out.println("Ukupan broj studenata: " + student1.size());
 		PrikaziUtils.IzlistajStudente(student1);
 	}
 
 	private static void Opcija2() {
-		List<Student> student2 = administriranje.studentiDrugeGodine();
+		List<Student> student2 = administriranjeStudenata.studentiDrugeGodine();
 		System.out.println("=================Spisak studenata druge godine===========================");
 		System.out.println("Ukupan broj studenata: " + student2.size());
 		PrikaziUtils.IzlistajStudente(student2);
 	}
 
 	private static void Opcija3() {
-		List<Student> student3 = administriranje.studentiTreceGodine();
+		List<Student> student3 = administriranjeStudenata.studentiTreceGodine();
 		System.out.println("=================Spisak studenata trece godine===========================");
 		System.out.println("Ukupan broj studenata: " + student3.size());
 		PrikaziUtils.IzlistajStudente(student3);
 	}
 
 	private static void Opcija4() {
-		List<Student> student4 = administriranje.studentiCetvrteGodine();
+		List<Student> student4 = administriranjeStudenata.studentiCetvrteGodine();
 		System.out.println("=================Spisak studenata cetvrte godine===========================");
 		System.out.println("Ukupan broj studenata: " + student4.size());
 		PrikaziUtils.IzlistajStudente(student4);
 	}
 
 	private static void Opcija5() {
-		List<Student> student5 = administriranje.studentiApsolventi();
+		List<Student> student5 = administriranjeStudenata.studentiApsolventi();
 		System.out.println("=================Spisak studenata  apsolvenata===========================");
 		System.out.println("Ukupan broj studenata: " + student5.size());
 		PrikaziUtils.IzlistajStudente(student5);

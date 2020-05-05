@@ -11,11 +11,11 @@ import com.skolamaric.exceptions.dao.ResultNotFoundException;
 import com.skolamaric.model.Student;
 import com.skolamaric.utils.KONSTANTE;
 
-public class AdministriranjeStudenta {
+public class AdministriranjeStudenata {
 
 	private StudentInMemoryDAOImpl studentDAO;
 
-	public AdministriranjeStudenta() {
+	public AdministriranjeStudenata() {
 		studentDAO = new StudentInMemoryDAOImpl();
 	}
 
