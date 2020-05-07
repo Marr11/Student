@@ -15,6 +15,9 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 	public Student create(Student student) {
 		String brojIndeksa = brojIndeksa();
 		student.setBrojIndeksa(brojIndeksa);
+		student.setIme(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
+		student.setPrezime(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo()); // poboljsaj, preko metoda i for petlje
+		student.setGodinaFakulteta(godinaStudija());
 		upisaniStudenti.put(student.getBrojIndeksa(), student);
 		return student;
 	}
@@ -52,6 +55,18 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 		}
 		StudentInMemoryDAOImpl.upisaniStudenti.put(randomBrojIndeksa, null);
 		return randomBrojIndeksa;
+
+	}
+
+	/*
+	 * Metoda za slucajan odabir godine studija return broj
+	 */
+	private int godinaStudija() {
+		int broj;
+		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_GODINE_STUDIJA - KONSTANTE.MIN_BROJ_GODINE_STUDIJA) + 1))
+				+ KONSTANTE.MIN_BROJ_GODINE_STUDIJA;
+
+		return broj;
 	}
 
 	@Override

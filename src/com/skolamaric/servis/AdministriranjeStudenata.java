@@ -13,7 +13,7 @@ import com.skolamaric.utils.KONSTANTE;
 
 public class AdministriranjeStudenata {
 
-	private StudentInMemoryDAOImpl studentDAO;
+	private StudentDAO studentDAO;
 
 	public AdministriranjeStudenata() {
 		studentDAO = new StudentInMemoryDAOImpl();
@@ -22,16 +22,11 @@ public class AdministriranjeStudenata {
 	public List<Student> generisanje() {
 		List<Student> studenti = new ArrayList<Student>();
 		try {
-
 			Student zadnjiUpisaniStudent = null;
-
 			for (int i = 0; i < 100; i++) {
 				String brojIndeksa = "";
-				Student student = new Student(brojIndeksa);
-				student.setIme(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
-				student.setPrezime(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
-				student.setGodinaFakulteta(godinaStudija());
-				student.setAktivanStudent(true);
+				Student student = new Student(brojIndeksa);							
+				student.setAktivanStudent(!student.isAktivanStudent());
 				zadnjiUpisaniStudent = studentDAO.create(student);
 
 			}
@@ -45,17 +40,6 @@ public class AdministriranjeStudenata {
 		}
 
 		return studenti;
-	}
-
-	/*
-	 * Metoda za slucajan odabir godine studija return broj
-	 */
-	private int godinaStudija() {
-		int broj;
-		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_GODINE_STUDIJA - KONSTANTE.MIN_BROJ_GODINE_STUDIJA) + 1))
-				+ KONSTANTE.MIN_BROJ_GODINE_STUDIJA;
-
-		return broj;
 	}
 
 	public List<Student> dajSveStudente() throws ResultNotFoundException {
