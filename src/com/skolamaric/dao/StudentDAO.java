@@ -12,11 +12,11 @@ public interface StudentDAO {
 	Student update (Student student);
 	void delete (String brojIndeksa);
 	List<Student> getAll() throws ResultNotFoundException;
-	List<Student> getStudentiPrveGodine();
-	List<Student> getStudentiDrugeGodine();
-	List<Student> getStudentiTreceGodine();
-	List<Student> getStudentiCetvrteGodine();
-	List<Student> getStudentiApsolventi();
+	List<Student> getStudentiPrveGodine() throws ResultNotFoundException;
+	List<Student> getStudentiDrugeGodine() throws ResultNotFoundException;
+	List<Student> getStudentiTreceGodine() throws ResultNotFoundException;
+	List<Student> getStudentiCetvrteGodine() throws ResultNotFoundException;
+	List<Student> getStudentiApsolventi() throws ResultNotFoundException;
 	
-	int count();
+	int count ()throws ResultNotFoundException;
 }

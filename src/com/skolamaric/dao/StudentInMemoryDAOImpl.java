@@ -111,7 +111,7 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 	@Override
 	public List<Student> getStudentiApsolventi() {
 		// TODO Auto-generated method stub
-		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() > 1)
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() > 4)
 				.collect(Collectors.toList());
 	}
 }

@@ -1,5 +1,6 @@
 package com.skolamaric;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class AppConsole {
 	 */
 	static AdministriranjeStudenata administriranjeStudenata = new AdministriranjeStudenata();
 
-	public static void main(String[] args) throws ResultNotFoundException {
+	public static void main(String[] args) throws ResultNotFoundException, IOException {
 		Date date = new Date();
 		System.out.println("Pocetak rada aplikacije: " + date);
 		administriranjeStudenata.generisanje();
@@ -53,40 +54,42 @@ public class AppConsole {
 		}
 	}
 
-	private static void Opcija0() throws ResultNotFoundException {
+	private static void Opcija0() throws ResultNotFoundException, IOException {
 		List<Student> studenti = administriranjeStudenata.dajSveStudente();
 		System.out.println("Ukupan broj studenata: " + studenti.size());
 		PrikaziUtils.IzlistajStudente(studenti);
+		PrikaziUtils.izlistajStudenteIzDatoteke();
 	}
 
-	private static void Opcija1() {
+	private static void Opcija1() throws ResultNotFoundException {
 		List<Student> student1 = administriranjeStudenata.studentiPrveGodine();		
 		System.out.println("Ukupan broj studenata prve godine: " + student1.size());
 		PrikaziUtils.IzlistajStudente(student1);
 	}
 
-	private static void Opcija2() {
+	private static void Opcija2() throws ResultNotFoundException {
 		List<Student> student2 = administriranjeStudenata.studentiDrugeGodine();	
 		System.out.println("Ukupan broj studenata druge godine: " + student2.size());
 		PrikaziUtils.IzlistajStudente(student2);
 	}
 
-	private static void Opcija3() {
+	private static void Opcija3() throws ResultNotFoundException {
 		List<Student> student3 = administriranjeStudenata.studentiTreceGodine();
 		System.out.println("Ukupan broj studenata trece godine: " + student3.size());
 		PrikaziUtils.IzlistajStudente(student3);
 	}
 
-	private static void Opcija4() {
+	private static void Opcija4() throws ResultNotFoundException {
 		List<Student> student4 = administriranjeStudenata.studentiCetvrteGodine();
 		System.out.println("Ukupan broj studenata cetvrte godine: " + student4.size());
 		PrikaziUtils.IzlistajStudente(student4);
 	}
 
-	private static void Opcija5() {
+	private static void Opcija5() throws ResultNotFoundException {
 		List<Student> student5 = administriranjeStudenata.studentiApsolventi();
 		System.out.println("Ukupan broj studenata apsolvenata: " + student5.size());
 		PrikaziUtils.IzlistajStudente(student5);
+		
 	}
 
 	private static void prikaziOpcije() {

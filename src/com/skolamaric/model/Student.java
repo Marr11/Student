@@ -7,11 +7,10 @@ package com.skolamaric.model;
 		private int godinaFakulteta;
 		private boolean aktivanStudent;
 		private String brojIndeksa;
-		
-		public Student (String brojIndeksa) {
-			brojIndeksa = this.brojIndeksa;
+
+		public Student() {
+			this.brojIndeksa = "";
 		}
-		
 		public String getIme() {
 			return ime;
 		}

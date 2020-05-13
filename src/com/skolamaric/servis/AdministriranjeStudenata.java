@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.skolamaric.dao.StudentDAO;
+import com.skolamaric.dao.StudentFileSystemDAO;
 import com.skolamaric.dao.StudentInMemoryDAOImpl;
 import com.skolamaric.exceptions.dao.ResultNotFoundException;
 import com.skolamaric.model.Student;
@@ -14,9 +15,12 @@ import com.skolamaric.utils.KONSTANTE;
 public class AdministriranjeStudenata {
 
 	private StudentDAO studentDAO;
+	//You can never instantiate an interface in java. 
+	
 
 	public AdministriranjeStudenata() {
-		studentDAO = new StudentInMemoryDAOImpl();
+		//You can, however, refer to an object that implements an interface by the type of the interface.
+		studentDAO = new StudentFileSystemDAO();
 	}
 
 	public List<Student> generisanje() {
@@ -25,7 +29,7 @@ public class AdministriranjeStudenata {
 			Student zadnjiUpisaniStudent = null;
 			for (int i = 0; i < 100; i++) {
 				String brojIndeksa = "";
-				Student student = new Student(brojIndeksa);							
+				Student student = new Student();
 				student.setAktivanStudent(!student.isAktivanStudent());
 				zadnjiUpisaniStudent = studentDAO.create(student);
 
@@ -33,6 +37,9 @@ public class AdministriranjeStudenata {
 			System.out.println("Upisanih studenta: " + studentDAO.count());
 			zadnjiUpisaniStudent = studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa());
 			System.out.println("Poslednji upisani student " + zadnjiUpisaniStudent);
+			studenti = studentDAO.getAll();
+			Student ucitaniStudent = studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa());
+			System.out.println(ucitaniStudent);
 		} catch (ResultNotFoundException e) {
 
 			System.out.println(e.getMessage());
@@ -50,7 +57,7 @@ public class AdministriranjeStudenata {
 	 * Metoda za odvajanje liste studenata prve godine return List studenti prve
 	 * godine
 	 */
-	public List<Student> studentiPrveGodine() {
+	public List<Student> studentiPrveGodine() throws ResultNotFoundException {
 		List<Student> student1 = studentDAO.getStudentiPrveGodine();
 		return student1;
 
@@ -60,7 +67,7 @@ public class AdministriranjeStudenata {
 	 * Metoda za odvajanje liste studenata druge godine return List studenti druge
 	 * godine
 	 */
-	public List<Student> studentiDrugeGodine() {
+	public List<Student> studentiDrugeGodine() throws ResultNotFoundException {
 		List<Student> student2 = studentDAO.getStudentiDrugeGodine();
 		return student2;
 
@@ -70,17 +77,17 @@ public class AdministriranjeStudenata {
 	 * Metoda za odvajanje liste studenata trece godine return List studenti trece
 	 * godine
 	 */
-	public List<Student> studentiTreceGodine() {
+	public List<Student> studentiTreceGodine() throws ResultNotFoundException {
 		List<Student> student3 = studentDAO.getStudentiTreceGodine();
 		return student3;
 
 	}
 
 	/*
-	 * Metoda za odvajanje liste studenata cetvrte godine return List studenti trece
+	 * Metoda za odvajanje liste studenata cetvrte godine return List studenti cetvrte
 	 * godine
 	 */
-	public List<Student> studentiCetvrteGodine() {
+	public List<Student> studentiCetvrteGodine() throws ResultNotFoundException {
 		List<Student> student4 = studentDAO.getStudentiCetvrteGodine();
 		return student4;
 
@@ -89,7 +96,7 @@ public class AdministriranjeStudenata {
 	/*
 	 * Metoda za odvajanje liste apsolvenata return List apsolventi
 	 */
-	public List<Student> studentiApsolventi() {
+	public List<Student> studentiApsolventi() throws ResultNotFoundException {
 		List<Student> student5 = studentDAO.getStudentiApsolventi();
 		return student5;
 	}
