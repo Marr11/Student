@@ -43,5 +43,12 @@ public class PrikaziUtils {
 			}
 		}
 	  }
+	public static int godinaStudija() {
+		int broj;
+		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_GODINE_STUDIJA - KONSTANTE.MIN_BROJ_GODINE_STUDIJA) + 1))
+				+ KONSTANTE.MIN_BROJ_GODINE_STUDIJA;
+
+		return broj;
+	}
 	}
 

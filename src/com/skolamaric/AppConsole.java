@@ -45,6 +45,9 @@ public class AppConsole {
 			case "5":
 				Opcija5();
 				break;
+			case "6":
+				Opcija6();
+				break;
 			}
 			if ("kraj".equals(s)) {
 				System.out.println("Uneli ste komandu za kraj.");
@@ -58,7 +61,7 @@ public class AppConsole {
 		List<Student> studenti = administriranjeStudenata.dajSveStudente();
 		System.out.println("Ukupan broj studenata: " + studenti.size());
 		PrikaziUtils.IzlistajStudente(studenti);
-		PrikaziUtils.izlistajStudenteIzDatoteke();
+		//PrikaziUtils.izlistajStudenteIzDatoteke();
 	}
 
 	private static void Opcija1() throws ResultNotFoundException {
@@ -91,7 +94,11 @@ public class AppConsole {
 		PrikaziUtils.IzlistajStudente(student5);
 		
 	}
-
+	private static void Opcija6() throws ResultNotFoundException {
+		administriranjeStudenata.deleteAll();
+		System.out.println("SVI STUDENTI OBRISANI!!!");
+		}
+	
 	private static void prikaziOpcije() {
 		System.out.println("opcija 0 - izlistaj sve studente");
 		System.out.println("opcija 1 - izlistaj studente prve godine");
@@ -99,5 +106,6 @@ public class AppConsole {
 		System.out.println("opcija 3 - izlistaj studente trece godine");
 		System.out.println("opcija 4 - izlistaj studente cetvrte godine");
 		System.out.println("opcija 5 - izlistaj studente apsolvente");
+		System.out.println("opcija 6 - obrisi sve");
 	}
 }

@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.skolamaric.dao.StudentDAO;
+import com.skolamaric.dao.StudentDBDAO;
 import com.skolamaric.dao.StudentFileSystemDAO;
 import com.skolamaric.dao.StudentInMemoryDAOImpl;
 import com.skolamaric.exceptions.dao.ResultNotFoundException;
 import com.skolamaric.model.Student;
 import com.skolamaric.utils.KONSTANTE;
+import com.skolamaric.utils.PrikaziUtils;
 
 public class AdministriranjeStudenata {
+		private static final double PRAG_RASPODJELE_STUDENATA = 0.5;
 
 	private StudentDAO studentDAO;
 	//You can never instantiate an interface in java. 
@@ -20,26 +23,30 @@ public class AdministriranjeStudenata {
 
 	public AdministriranjeStudenata() {
 		//You can, however, refer to an object that implements an interface by the type of the interface.
-		studentDAO = new StudentFileSystemDAO();
+		studentDAO = new StudentDBDAO();
 	}
 
 	public List<Student> generisanje() {
 		List<Student> studenti = new ArrayList<Student>();
+		
 		try {
-			Student zadnjiUpisaniStudent = null;
+			Student poslednjiUpisaniStudent = null;
 			for (int i = 0; i < 100; i++) {
-				String brojIndeksa = "";
+				//String brojIndeksa = "";
 				Student student = new Student();
-				student.setAktivanStudent(!student.isAktivanStudent());
-				zadnjiUpisaniStudent = studentDAO.create(student);
+				student.setBrojIndeksa(String.valueOf(System.currentTimeMillis()));				
+				student.setAktivanStudent(Math.random()> PRAG_RASPODJELE_STUDENATA);
+				poslednjiUpisaniStudent = studentDAO.create(student);
 
 			}
+			
 			System.out.println("Upisanih studenta: " + studentDAO.count());
-			zadnjiUpisaniStudent = studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa());
-			System.out.println("Poslednji upisani student " + zadnjiUpisaniStudent);
+			poslednjiUpisaniStudent = studentDAO.read(poslednjiUpisaniStudent.getBrojIndeksa());
+			System.out.println("Poslednji upisani student " + poslednjiUpisaniStudent);
 			studenti = studentDAO.getAll();
-			Student ucitaniStudent = studentDAO.read(zadnjiUpisaniStudent.getBrojIndeksa());
+			Student ucitaniStudent = studentDAO.read(poslednjiUpisaniStudent.getBrojIndeksa());
 			System.out.println(ucitaniStudent);
+			studenti = studentDAO.getAll();
 		} catch (ResultNotFoundException e) {
 
 			System.out.println(e.getMessage());
@@ -99,6 +106,12 @@ public class AdministriranjeStudenata {
 	public List<Student> studentiApsolventi() throws ResultNotFoundException {
 		List<Student> student5 = studentDAO.getStudentiApsolventi();
 		return student5;
+	}
+	public void deleteAll() throws ResultNotFoundException {
+		for(Student student: studentDAO.getAll()) {
+			studentDAO.delete(student.getBrojIndeksa());
+		}
+		
 	}
 
 }

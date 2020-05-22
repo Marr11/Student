@@ -83,35 +83,35 @@ public class StudentInMemoryDAOImpl implements StudentDAO {
 	@Override
 	public List<Student> getStudentiPrveGodine() {
 		// TODO Auto-generated method stub
-		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 1)
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_PRVE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiDrugeGodine() {
 		// TODO Auto-generated method stub
-		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 2)
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_DRUGE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiTreceGodine() {
 		// TODO Auto-generated method stub
-		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 3)
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_TRECE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiCetvrteGodine() {
 		// TODO Auto-generated method stub
-		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == 4)
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_CETVRTE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiApsolventi() {
 		// TODO Auto-generated method stub
-		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() > 4)
+		return StudentInMemoryDAOImpl.upisaniStudenti.values().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_APSOLVENT)
 				.collect(Collectors.toList());
 	}
 }

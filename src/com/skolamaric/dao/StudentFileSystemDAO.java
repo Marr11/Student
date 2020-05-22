@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import com.skolamaric.exceptions.dao.ResultNotFoundException;
 import com.skolamaric.model.Student;
 import com.skolamaric.utils.KONSTANTE;
+import com.skolamaric.utils.PrikaziUtils;
 
 public class StudentFileSystemDAO implements StudentDAO {
 	
@@ -26,7 +27,7 @@ public class StudentFileSystemDAO implements StudentDAO {
 		  student.setBrojIndeksa(String.valueOf(System.currentTimeMillis()));
 		  student.setIme(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo());
 		  student.setPrezime(KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo() + KONSTANTE.slucajnoSlovo()); // poboljsaj, preko metoda i for petlje
-		  student.setGodinaFakulteta(godinaStudija());
+		  student.setGodinaFakulteta(PrikaziUtils.godinaStudija());
 		  
 		  XMLEncoder encoder=null;
 			try{
@@ -89,35 +90,35 @@ public class StudentFileSystemDAO implements StudentDAO {
 
 	@Override
 	public List<Student> getStudentiPrveGodine() throws ResultNotFoundException {
-		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == 1)
+		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_PRVE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiDrugeGodine() throws ResultNotFoundException {
 		// TODO Auto-generated method stub
-		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == 2)
+		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_DRUGE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiTreceGodine() throws ResultNotFoundException {
 		// TODO Auto-generated method stub
-		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == 3)
+		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_TRECE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiCetvrteGodine() throws ResultNotFoundException {
 		// TODO Auto-generated method stub
-		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == 4)
+		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_CETVRTE_GODINE)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Student> getStudentiApsolventi() throws ResultNotFoundException {
 		// TODO Auto-generated method stub
-		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() > 4)
+		return this.getAll().stream().filter(s -> s.getGodinaFakulteta() == KONSTANTE.STUDENT_APSOLVENT)
 				.collect(Collectors.toList());
 	}
 
@@ -126,13 +127,7 @@ public class StudentFileSystemDAO implements StudentDAO {
 		// TODO Auto-generated method stub
 		return this.getAll().size();
 	}
-	private int godinaStudija() {
-		int broj;
-		broj = (int) (Math.random() * ((KONSTANTE.MAX_BROJ_GODINE_STUDIJA - KONSTANTE.MIN_BROJ_GODINE_STUDIJA) + 1))
-				+ KONSTANTE.MIN_BROJ_GODINE_STUDIJA;
-
-		return broj;
-	}
+	
 	private String fileName(String brojIndeksa) {
 		return FILE_ROOT  + brojIndeksa + EXTENZIJA;
 	}
